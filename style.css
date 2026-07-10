@@ -1,0 +1,203 @@
+:root {
+    --bg-dark: #090d16;
+    --bg-card: #111625;
+    --purple-neon: #7000ff;
+    --cyan-neon: #00ffcc;
+    --text-main: #ffffff;
+    --text-muted: #8fa0be;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #05070b;
+    color: var(--text-main);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    direction: rtl;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.phone-container {
+    width: 375px;
+    height: 780px;
+    background-color: var(--bg-dark);
+    border: 3px solid #1f2638;
+    border-radius: 35px;
+    padding: 25px 20px;
+    box-shadow: 0px 15px 40px rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.header h2 {
+    font-size: 20px;
+    margin-bottom: 5px;
+    background: linear-gradient(to left, #fff, var(--text-muted));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.subtitle {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 25px;
+}
+
+.main-card {
+    background: linear-gradient(135deg, #161c2e 0%, #111625 100%);
+    border: 1px dashed #2c3854;
+    border-radius: 20px;
+    padding: 25px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+.main-card:hover {
+    border-color: var(--purple-neon);
+    box-shadow: 0 0 15px rgba(112, 0, 255, 0.2);
+}
+.icon-upload {
+    font-size: 35px;
+    margin-bottom: 10px;
+}
+.file-status {
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--cyan-neon);
+    font-weight: bold;
+}
+
+.celebrities-section h3 {
+    font-size: 16px;
+    margin: 25px 0 15px 0;
+}
+
+/* شبكة عرض الفنانين المحدثة */
+.grid-celebrities {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+.grid-celebrities::-webkit-scrollbar {
+    height: 4px;
+}
+.grid-celebrities::-webkit-scrollbar-thumb {
+    background: #1f2638;
+    border-radius: 10px;
+}
+
+.celeb-card {
+    text-align: center;
+    cursor: pointer;
+    min-width: 80px;
+}
+
+.voice-icon-wrapper {
+    position: relative;
+    width: 65px;
+    height: 65px;
+    margin: 0 auto;
+    background-color: #161c2e;
+    border: 2px solid #222b44;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s ease;
+}
+.mic-icon {
+    font-size: 24px;
+}
+
+.celeb-card.selected .voice-icon-wrapper {
+    border-color: var(--cyan-neon);
+    background-color: #11222c;
+    box-shadow: 0 0 15px rgba(0, 255, 204, 0.4);
+}
+
+.checkmark {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    background-color: var(--cyan-neon);
+    color: #000;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: 0.3s ease;
+}
+.celeb-card.selected .checkmark {
+    opacity: 1;
+}
+.celeb-card p {
+    font-size: 12px;
+    margin-top: 8px;
+    color: var(--text-main);
+}
+
+.action-section {
+    margin-top: auto;
+    padding: 20px 0 10px 0;
+}
+.btn-convert {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 15px;
+    background: linear-gradient(90deg, var(--purple-neon), #a200ff);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0px 5px 20px rgba(112, 0, 255, 0.4);
+    transition: 0.3s ease;
+}
+.btn-convert:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 8px 25px rgba(112, 0, 255, 0.6);
+}
+
+.divider {
+    border: 0;
+    height: 1px;
+    background: #1f2638;
+    margin: 20px 0;
+}
+.result-box {
+    background-color: #111625;
+    border-radius: 15px;
+    padding: 15px;
+    text-align: center;
+    margin-top: 10px;
+}
+.loading-bar {
+    width: 100%;
+    height: 6px;
+    background-color: #1f2638;
+    border-radius: 10px;
+    margin-top: 15px;
+    overflow: hidden;
+}
+.loading-bar div {
+    width: 0%;
+    height: 100%;
+    background-color: var(--cyan-neon);
+    border-radius: 10px;
+    transition: width 4s linear;
+}

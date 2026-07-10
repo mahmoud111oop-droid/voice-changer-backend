@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تطبيق تغيير الأصوات بالفيديو والأغاني - ذكاء اصطناعي</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="phone-container">
+        
+        <div class="header">
+            <h2>مغير الأصوات الذكي <span class="wave-icon">🎬🎵</span></h2>
+            <p class="subtitle">حوّل طبقة ونبرة صوت أي أغنية أو فيديو فوراً وبخفة</p>
+        </div>
+
+        <div class="upload-section">
+            <div class="main-card" id="uploadCard" onclick="triggerUpload()">
+                <div class="icon-upload" id="uploadIcon">📁</div>
+                <h3 id="uploadTitle">رفع ملف (أغنية أو فيديو)</h3>
+                <p class="card-hint">يدعم صيغ MP3, WAV, MP4, MKV</p>
+                <div id="fileStatus" class="file-status"></div>
+            </div>
+            <input type="file" id="mediaInput" accept="audio/*,video/*" style="display: none;" onchange="handleFileSelect(event)">
+        </div>
+
+        <div class="celebrities-section">
+            <h3>اختر تأثير تغيير الصوت الجديد</h3>
+            <div class="grid-celebrities" id="celebritiesGrid">
+                </div>
+        </div>
+
+        <div class="action-section">
+            <button class="btn-convert" id="convertBtn" onclick="startConversion()">ابدأ المعالجة والتحويل ✨</button>
+        </div>
+
+        <div class="result-section" id="resultSection" style="display: none;">
+            <hr class="divider">
+            <h3>النتيجة النهائية</h3>
+            <div class="result-box">
+                <p id="resultText">جاري المعالجة...</p>
+                <div class="loading-bar" id="loadingBar"><div></div></div>
+                
+                <audio id="audioPlayer" controls style="display: none; width: 100%; margin-top: 15px;"></audio>
+                
+                <video id="videoPlayer" controls style="display: none; width: 100%; margin-top: 15px; border-radius: 10px; background: #000;"></video>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

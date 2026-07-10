@@ -95,7 +95,7 @@ function startConversion() {
     formData.append("file", selectedFile);
     formData.append("artist", selectedVoiceModel);
 
-    fetch("http://127.0.0.1:8000/convert", {
+    fetch("/convert", {
         method: "POST",
         body: formData
     })
@@ -118,7 +118,7 @@ function startConversion() {
     })
     .catch(error => {
         console.error(error);
-        resultText.innerText = "❌ عذراً، السيرفر مش مستجيب. اتأكد إنك مشغل ملف main.py";
+        resultText.innerText = "❌ عذراً، السيرفر مش مستجيب. اتأكد من اتصالك بالإنترنت وحالة سيرفر Railway.";
         loadingBarDiv.style.backgroundColor = "#ff0055";
     });
 }

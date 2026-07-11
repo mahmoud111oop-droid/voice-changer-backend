@@ -79,6 +79,7 @@ function startConversion() {
 
     resultSection.style.display = 'block';
     loadingBarDiv.style.width = '0%';
+    loadingBarDiv.style.backgroundColor = '#8a2be2'; // إعادة اللون البنفسجي الأصلي للبار
     audioPlayer.style.display = 'none';
     videoPlayer.style.display = 'none';
 
@@ -95,15 +96,21 @@ function startConversion() {
     formData.append("file", selectedFile);
     formData.append("artist", selectedVoiceModel);
 
-    fetch("/convert", {
-        method: "POST",
-        body: formData
-    })
-    .then(response => {
-        if (!response.ok) { throw new Error("مشكلة في السيرفر"); }
+    fetch(`${window.location.origin}/convert`, {
+    method: "POST",
+    body: formData
+})
+    .then(async response => {
+        if (!response.ok) { 
+            const errText = await response.text();
+            throw new Error(errText || "مشكلة في السيرفر"); 
+        }
         return response.blob();
     })
     .then(blob => {
+        if (blob.size === 0) {
+            throw new Error("الملف الراجع فارغ من السيرفر");
+        }
         const fileURL = URL.createObjectURL(blob);
         loadingBarDiv.style.width = '100%';
         resultText.innerText = `✨ اكتمل التعديل بنجاح! شغل النتيجة الآن:`;
@@ -111,14 +118,18 @@ function startConversion() {
         if (fileType === 'video') {
             videoPlayer.style.display = 'block';
             videoPlayer.src = fileURL;
+            videoPlayer.controls = true;
+            videoPlayer.load(); // تحديث المشغل لقراءة الفيديو الجديد
         } else {
             audioPlayer.style.display = 'block';
             audioPlayer.src = fileURL;
+            audioPlayer.controls = true;
+            audioPlayer.load(); // تحديث المشغل لقراءة الصوت الجديد
         }
     })
     .catch(error => {
-        console.error(error);
-        resultText.innerText = "❌ عذراً، السيرفر مش مستجيب. اتأكد من اتصالك بالإنترنت وحالة سيرفر Railway.";
-        loadingBarDiv.style.backgroundColor = "#ff0055";
+        console.error("عطل الـ Fetch:", error);
+        resultText.innerText = "❌ عذراً، حصلت مشكلة أثناء معالجة أو تحميل الملف المعدل. تأكد إن السيرفر شغال في الـ VS Code.";
+        loadingBarDiv.style.backgroundColor = "#ff0055"; // تحويل البار للون الأحمر عند الخطأ
     });
 }
